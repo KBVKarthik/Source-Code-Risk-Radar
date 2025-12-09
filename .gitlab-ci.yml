@@ -1,0 +1,40 @@
+stages:
+  - analyze
+
+code_risk_analysis:
+  stage: analyze
+  image: python:3.11
+  
+  before_script:
+    - pip install -r requirements.txt
+  
+  script:
+    - python main.py --output-format html --output-dir reports
+    - python main.py --output-format json --output-dir reports
+    - |
+      python -c "
+      import json
+      reports = [f for f in __import__('os').listdir('./reports') if f.endswith('.json')]
+      if reports:
+        report = json.load(open(f'./reports/{reports[0]}'))
+        critical = report['summary']['critical_modules_count']
+        print(f'Critical Issues: {critical}')
+        print(f'High Risk Modules: {report[\"summary\"][\"high_risk_modules_count\"]}')
+        print(f'Overall Risk: {report[\"summary\"][\"overall_risk_score\"]:.1f}/100')
+        if critical > 0:
+          exit(1)
+      "
+  
+  artifacts:
+    paths:
+      - reports/
+    expire_in: 30 days
+    reports:
+      dotenv: reports/metrics.txt
+  
+  allow_failure: true
+  
+  only:
+    - merge_requests
+    - main
+    - develop

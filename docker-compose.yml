@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  risk-radar:
+    build: .
+    image: source-code-risk-radar:latest
+    container_name: risk-radar
+    volumes:
+      - /path/to/code:/code:ro
+      - ./reports:/app/reports
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: --repo-path /code --output-format html
+
+  # Optional: Web dashboard server
+  web-server:
+    image: nginx:alpine
+    container_name: risk-radar-web
+    volumes:
+      - ./reports:/usr/share/nginx/html:ro
+    ports:
+      - "8080:80"
+    depends_on:
+      - risk-radar

@@ -1,0 +1,98 @@
+name: Code Risk Analysis
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 2 * * 0'  # Weekly analysis
+
+jobs:
+  risk-analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # Full history for git analysis
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run Risk Radar analysis
+      run: python main.py --output-format html --output-dir ./risk-reports
+
+    - name: Upload HTML Report
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: risk-radar-html
+        path: risk-reports/
+        retention-days: 30
+
+    - name: Generate JSON Report
+      run: python main.py --output-format json --output-dir ./risk-reports
+      if: always()
+
+    - name: Comment on PR with Risk Summary
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const fs = require('fs');
+          const reports = fs.readdirSync('./risk-reports').filter(f => f.endsWith('.json'));
+          
+          if (reports.length > 0) {
+            const report = JSON.parse(fs.readFileSync(`./risk-reports/${reports[0]}`, 'utf8'));
+            const summary = report.summary;
+            
+            const comment = `## 🎯 Code Risk Analysis Results
+            
+            **Overall Risk Score**: ${summary.overall_risk_score.toFixed(1)}/100 (${summary.overall_risk_level})
+            
+            **Findings**:
+            - 🔴 Critical Issues: ${summary.critical_modules_count}
+            - 🟠 High Risk Modules: ${summary.high_risk_modules_count}
+            - 🔐 Security Issues: ${summary.security_issues_count}
+            - 📦 Dependency Risks: ${summary.dependency_risks_count}
+            
+            [View Full Report](../actions/runs/${context.runId})`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+          }
+
+    - name: Fail if critical issues found
+      run: |
+        python -c "
+        import json
+        reports = [f for f in __import__('os').listdir('./risk-reports') if f.endswith('.json')]
+        if reports:
+          report = json.load(open(f'./risk-reports/{reports[0]}'))
+          critical = report['summary']['critical_modules_count']
+          if critical > 0:
+            print(f'::error::Found {critical} critical issues. Please fix before merging.')
+            exit(1)
+        "
+
+    - name: Archive results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: risk-analysis-data
+        path: |
+          risk-reports/
+          .
