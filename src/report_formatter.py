@@ -311,6 +311,18 @@ class ReportFormatter:
 
         <!-- Dependency Risks Section -->
         {self._build_dependency_risks_html(report)}
+
+        <!-- Trend Analysis Section -->
+        {self._build_trend_analysis_html(report)}
+
+        <!-- Technical Debt Section -->
+        {self._build_technical_debt_html(report)}
+
+        <!-- Test Coverage Section -->
+        {self._build_test_coverage_html(report)}
+
+        <!-- Team Impact Section -->
+        {self._build_team_impact_html(report)}
     </div>
 
     <div class="footer">
@@ -434,6 +446,168 @@ class ReportFormatter:
             </tr>"""
         
         html += '</table></div>'
+        return html
+
+    def _build_trend_analysis_html(self, report: RiskReport) -> str:
+        """Build HTML for trend analysis"""
+        if not report.trend_analysis:
+            return ""
+
+        trend = report.trend_analysis
+        trend_icon = "📈" if trend.trend_direction == "improving" else "📉" if trend.trend_direction == "degrading" else "➡️"
+        
+        html = f'<div class="section"><h2>{trend_icon} Risk Trends & Historical Comparison</h2>'
+        html += f'<div style="padding: 15px; background: #f0f0f0; border-radius: 5px; margin-bottom: 20px;">'
+        
+        if trend.trend_direction == "improving":
+            html += f'<p style="color: #388e3c; font-weight: bold;">Positive Trend: Risk improving by {abs(trend.risk_change_percentage):.1f}% ({trend.improvement_rate:.0f}% improvement rate)</p>'
+        elif trend.trend_direction == "degrading":
+            html += f'<p style="color: #d32f2f; font-weight: bold;">Warning: Risk increasing by {trend.risk_change_percentage:.1f}%</p>'
+            if trend.days_until_critical:
+                html += f'<p style="color: #d32f2f;">Days until CRITICAL risk: {trend.days_until_critical}</p>'
+        else:
+            html += f'<p style="color: #666;">Risk stable - no significant change</p>'
+        
+        html += '</div>'
+        
+        # Recommendations
+        for rec in trend.recommendations:
+            html += f'<p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">{rec}</p>'
+        
+        html += '</div>'
+        return html
+
+    def _build_technical_debt_html(self, report: RiskReport) -> str:
+        """Build HTML for technical debt"""
+        if not report.technical_debt:
+            return ""
+
+        debt = report.technical_debt
+        html = '<div class="section"><h2>💰 Technical Debt Analysis</h2>'
+        
+        html += f'<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">'
+        
+        html += f'''<div style="padding: 15px; background: #ffebee; border-radius: 5px; border-left: 4px solid #d32f2f;">
+            <strong>Total Debt</strong><br>
+            <span style="font-size: 1.5em; color: #d32f2f;">{debt.total_debt_hours:.0f} hours</span><br>
+            <span style="font-size: 0.9em; color: #666;">Est. ${debt.estimated_cost_usd:,.0f}</span>
+        </div>'''
+        
+        html += f'''<div style="padding: 15px; background: #fff3e0; border-radius: 5px; border-left: 4px solid #f57c00;">
+            <strong>Time to Resolve</strong><br>
+            <span style="font-size: 1.5em; color: #f57c00;">{debt.estimated_weeks:.1f} weeks</span><br>
+            <span style="font-size: 0.9em; color: #666;">with 2 developers</span>
+        </div>'''
+        
+        html += f'''<div style="padding: 15px; background: #e3f2fd; border-radius: 5px; border-left: 4px solid #2196F3;">
+            <strong>Debt by Type</strong><br>
+            <span style="font-size: 0.9em;">Complexity: {debt.debt_by_type.get('complexity', 0):.0f}h<br>Security: {debt.debt_by_type.get('security', 0):.0f}h<br>Churn: {debt.debt_by_type.get('churn', 0):.0f}h</span>
+        </div>'''
+        
+        html += '</div>'
+        
+        # Top debt items
+        if debt.top_debt_items:
+            html += '<h3>Top Debt Items</h3><table style="font-size: 0.9em;">'
+            html += '<tr><th>File</th><th>Type</th><th>Priority</th><th>Hours</th><th>Impact</th></tr>'
+            
+            for item in debt.top_debt_items[:10]:
+                html += f'''<tr>
+                    <td><strong>{item.file_path}</strong></td>
+                    <td>{item.debt_type}</td>
+                    <td style="color: {'#d32f2f' if item.priority == 'critical' else '#f57c00' if item.priority == 'high' else '#666'};">{item.priority.upper()}</td>
+                    <td>{item.effort_hours:.1f}h</td>
+                    <td>{item.impact}</td>
+                </tr>'''
+            
+            html += '</table>'
+        
+        html += '</div>'
+        return html
+
+    def _build_test_coverage_html(self, report: RiskReport) -> str:
+        """Build HTML for test coverage"""
+        if not report.test_coverage:
+            return ""
+
+        cov = report.test_coverage
+        html = '<div class="section"><h2>🧪 Test Coverage Analysis</h2>'
+        
+        # Coverage percentage bar
+        coverage_color = '#388e3c' if cov.coverage_percentage >= 80 else '#fbc02d' if cov.coverage_percentage >= 50 else '#d32f2f'
+        html += f'''<div style="margin-bottom: 20px;">
+            <p><strong>Overall Coverage: {cov.coverage_percentage:.1f}%</strong></p>
+            <div style="width: 100%; height: 30px; background: #e0e0e0; border-radius: 5px; overflow: hidden;">
+                <div style="width: {min(100, cov.coverage_percentage)}%; height: 100%; background: {coverage_color}; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                    {cov.coverage_percentage:.1f}%
+                </div>
+            </div>
+        </div>'''
+        
+        # Coverage stats
+        html += f'''<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px;">
+            <div style="padding: 15px; background: #e8f5e9; border-radius: 5px;">
+                <strong>With Tests</strong><br>
+                <span style="font-size: 1.5em; color: #388e3c;">{cov.files_with_tests}</span> files
+            </div>
+            <div style="padding: 15px; background: #ffebee; border-radius: 5px;">
+                <strong>Without Tests</strong><br>
+                <span style="font-size: 1.5em; color: #d32f2f;">{cov.files_without_tests}</span> files
+            </div>
+            <div style="padding: 15px; background: #fff3e0; border-radius: 5px;">
+                <strong>Critical Untested</strong><br>
+                <span style="font-size: 1.5em; color: #f57c00;">{cov.critical_untested}</span> modules
+            </div>
+            <div style="padding: 15px; background: #f3e5f5; border-radius: 5px;">
+                <strong>Priority</strong><br>
+                <span style="font-size: 1.5em; color: #7b1fa2;">{cov.test_debt_priority}</span>
+            </div>
+        </div>'''
+        
+        # Recommendations
+        html += '<h3>Testing Recommendations</h3>'
+        for rec in cov.testing_recommendations:
+            html += f'<p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">{rec}</p>'
+        
+        html += '</div>'
+        return html
+
+    def _build_team_impact_html(self, report: RiskReport) -> str:
+        """Build HTML for team impact"""
+        if not report.team_impact:
+            return ""
+
+        team = report.team_impact
+        html = '<div class="section"><h2>👥 Team Impact & Knowledge Distribution</h2>'
+        
+        # Team risk
+        html += f'''<div style="padding: 15px; background: #f0f0f0; border-radius: 5px; margin-bottom: 20px;">
+            <p><strong>Team Risk Exposure Score: {team.team_risk_exposure:.1f}/100</strong></p>
+            <p>Risk score averaged across all team members and their assigned modules</p>
+        </div>'''
+        
+        # Knowledge distribution
+        html += '<h3>Knowledge Distribution</h3>'
+        if team.knowledge_distribution:
+            html += '<table style="font-size: 0.9em;">'
+            html += '<tr><th>Developer</th><th>Modules Owned</th></tr>'
+            for dev, count in sorted(team.knowledge_distribution.items(), key=lambda x: x[1], reverse=True):
+                html += f'<tr><td>{dev}</td><td>{count}</td></tr>'
+            html += '</table>'
+        
+        # Critical dependencies
+        if team.critical_dependencies:
+            html += '<h3>Bus Factors (Critical Dependencies)</h3>'
+            for dep in team.critical_dependencies:
+                html += f'<p style="margin: 10px 0; padding: 10px; background: #ffebee; border-left: 3px solid #d32f2f; color: #d32f2f;">⚠️ {dep}</p>'
+        
+        # Recommendations
+        if team.recommended_actions:
+            html += '<h3>Recommended Actions</h3>'
+            for action in team.recommended_actions[:5]:
+                html += f'<p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">{action}</p>'
+        
+        html += '</div>'
         return html
 
     @staticmethod

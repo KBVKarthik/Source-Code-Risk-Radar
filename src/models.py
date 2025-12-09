@@ -106,6 +106,12 @@ class RiskReport:
     critical_modules: List[ModuleRisk] = field(default_factory=list)
     failure_predictions: List[Dict[str, Any]] = field(default_factory=list)
     
+    # Value-add fields (populated after core analysis)
+    trend_analysis: Optional[Any] = None
+    technical_debt: Optional[Any] = None
+    test_coverage: Optional[Any] = None
+    team_impact: Optional[Any] = None
+    
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization"""
         return {
@@ -139,3 +145,4 @@ class RiskReport:
             return RiskLevel.MEDIUM
         else:
             return RiskLevel.LOW
+

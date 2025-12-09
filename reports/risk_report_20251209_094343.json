@@ -1,0 +1,559 @@
+{
+  "metadata": {
+    "repository_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar",
+    "analysis_timestamp": "2025-12-09T09:43:43.051680",
+    "analysis_duration_seconds": 0.206558,
+    "total_files_analyzed": 19,
+    "total_lines_of_code": 1458
+  },
+  "summary": {
+    "overall_risk_score": 33.376376742767846,
+    "overall_risk_level": "LOW",
+    "critical_modules_count": 0,
+    "high_risk_modules_count": 1,
+    "security_issues_count": 7,
+    "dependency_risks_count": 6
+  },
+  "modules": [
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\analyzers\\security_analyzer.py",
+      "overall_risk_score": 60.03358248060088,
+      "risk_level": "HIGH",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 80,
+      "churn_risk": 15.879693868851676,
+      "bus_factor_risk": 1.0,
+      "failure_probability": 0.28097241493988834,
+      "critical_issues": [
+        "debug_mode_enabled",
+        "debug_mode_enabled",
+        "debug_mode_enabled",
+        "debug_mode_enabled"
+      ],
+      "recommendations": [
+        "Address security vulnerabilities immediately",
+        "Mitigate bus factor - documentation and pair programming needed"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\risk_radar.py",
+      "overall_risk_score": 53.418664609523425,
+      "risk_level": "MEDIUM",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 20,
+      "churn_risk": 57.27999251947913,
+      "bus_factor_risk": 1.0,
+      "failure_probability": 0.4051733108917707,
+      "critical_issues": [
+        "unsafe_function_os.system"
+      ],
+      "recommendations": [
+        "Mitigate bus factor - documentation and pair programming needed"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\technical_debt_calculator.py",
+      "overall_risk_score": 53.21917588303379,
+      "risk_level": "MEDIUM",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 0,
+      "churn_risk": 78.37276078678956,
+      "bus_factor_risk": 1.0,
+      "failure_probability": 0.468451615693702,
+      "critical_issues": [],
+      "recommendations": [
+        "Stabilize code - high change frequency indicates instability",
+        "Mitigate bus factor - documentation and pair programming needed"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\team_impact_analyzer.py",
+      "overall_risk_score": 50.8539662185489,
+      "risk_level": "MEDIUM",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 0,
+      "churn_risk": 69.77199837048083,
+      "bus_factor_risk": 1.0,
+      "failure_probability": 0.4426493284447758,
+      "critical_issues": [],
+      "recommendations": [
+        "Stabilize code - high change frequency indicates instability",
+        "Mitigate bus factor - documentation and pair programming needed"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\analyzers\\__init__.py",
+      "overall_risk_score": 43.8424716961312,
+      "risk_level": "MEDIUM",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 0,
+      "churn_risk": 44.275654652598305,
+      "bus_factor_risk": 1.0,
+      "failure_probability": 0.36616029729112826,
+      "critical_issues": [],
+      "recommendations": [
+        "Mitigate bus factor - documentation and pair programming needed"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\ml_models\\failure_predictor.py",
+      "overall_risk_score": 41.006817300690656,
+      "risk_level": "MEDIUM",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 0,
+      "churn_risk": 33.964184123723584,
+      "bus_factor_risk": 1.0,
+      "failure_probability": 0.33522588570450407,
+      "critical_issues": [],
+      "recommendations": [
+        "Mitigate bus factor - documentation and pair programming needed"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\analyzers\\complexity_analyzer.py",
+      "overall_risk_score": 39.572894444833,
+      "risk_level": "LOW",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 0,
+      "churn_risk": 28.74991919333211,
+      "bus_factor_risk": 1.0,
+      "failure_probability": 0.3195830909133297,
+      "critical_issues": [],
+      "recommendations": [
+        "Mitigate bus factor - documentation and pair programming needed"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\tests\\test_integration.py",
+      "overall_risk_score": 39.22344418745354,
+      "risk_level": "LOW",
+      "complexity_risk": 6.666666666666667,
+      "security_risk": 0,
+      "churn_risk": 21.41858492407347,
+      "bus_factor_risk": 1.0,
+      "failure_probability": 0.33092242143888706,
+      "critical_issues": [],
+      "recommendations": [
+        "Mitigate bus factor - documentation and pair programming needed"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\trend_analyzer.py",
+      "overall_risk_score": 38.62063478364226,
+      "risk_level": "LOW",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 0,
+      "churn_risk": 25.28715678900214,
+      "bus_factor_risk": 1.0,
+      "failure_probability": 0.3091948037003398,
+      "critical_issues": [],
+      "recommendations": [
+        "Mitigate bus factor - documentation and pair programming needed"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\report_formatter.py",
+      "overall_risk_score": 37.17714899347052,
+      "risk_level": "LOW",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 0,
+      "churn_risk": 20.038117552014004,
+      "bus_factor_risk": 1.0,
+      "failure_probability": 0.2934476859893753,
+      "critical_issues": [],
+      "recommendations": [
+        "Mitigate bus factor - documentation and pair programming needed"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\test_coverage_analyzer.py",
+      "overall_risk_score": 36.07144707084236,
+      "risk_level": "LOW",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 0,
+      "churn_risk": 16.01738328791161,
+      "bus_factor_risk": 1.0,
+      "failure_probability": 0.2813854831970682,
+      "critical_issues": [],
+      "recommendations": [
+        "Mitigate bus factor - documentation and pair programming needed"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\tests\\__init__.py",
+      "overall_risk_score": 35.833415053169546,
+      "risk_level": "LOW",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 0,
+      "churn_risk": 15.151812314555924,
+      "bus_factor_risk": 1.0,
+      "failure_probability": 0.2787887702770011,
+      "critical_issues": [],
+      "recommendations": [
+        "Mitigate bus factor - documentation and pair programming needed"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\ml_models\\__init__.py",
+      "overall_risk_score": 32.3803651644477,
+      "risk_level": "LOW",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 0,
+      "churn_risk": 2.595267264658315,
+      "bus_factor_risk": 1.0,
+      "failure_probability": 0.2411191351273083,
+      "critical_issues": [],
+      "recommendations": [
+        "Mitigate bus factor - documentation and pair programming needed"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\tests\\test_analyzers.py",
+      "overall_risk_score": 23.61607342941339,
+      "risk_level": "LOW",
+      "complexity_risk": 6.666666666666667,
+      "security_risk": 40,
+      "churn_risk": 25.57360034938203,
+      "bus_factor_risk": 0.0,
+      "failure_probability": 0.19338746771481274,
+      "critical_issues": [
+        "hardcoded_secret_api_key",
+        "unsafe_function_eval"
+      ],
+      "recommendations": [
+        "Monitor and maintain current quality standards"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\main.py",
+      "overall_risk_score": 20.711106439661897,
+      "risk_level": "LOW",
+      "complexity_risk": 6.666666666666667,
+      "security_risk": 0,
+      "churn_risk": 58.6464476593766,
+      "bus_factor_risk": 0.0,
+      "failure_probability": 0.29260600964479644,
+      "critical_issues": [],
+      "recommendations": [
+        "Monitor and maintain current quality standards"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\__init__.py",
+      "overall_risk_score": 8.277239470938767,
+      "risk_level": "LOW",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 0,
+      "churn_risk": 19.492992015534913,
+      "bus_factor_risk": 0.0,
+      "failure_probability": 0.14181230937993805,
+      "critical_issues": [],
+      "recommendations": [
+        "Monitor and maintain current quality standards"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\analyzers\\git_analyzer.py",
+      "overall_risk_score": 7.99187176642131,
+      "risk_level": "LOW",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 0,
+      "churn_risk": 18.455291271835065,
+      "bus_factor_risk": 0.0,
+      "failure_probability": 0.13869920714883854,
+      "critical_issues": [],
+      "recommendations": [
+        "Monitor and maintain current quality standards"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\models.py",
+      "overall_risk_score": 7.516426291494181,
+      "risk_level": "LOW",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 0,
+      "churn_risk": 16.726398635736416,
+      "bus_factor_risk": 0.0,
+      "failure_probability": 0.13351252924054258,
+      "critical_issues": [],
+      "recommendations": [
+        "Monitor and maintain current quality standards"
+      ]
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\analyzers\\dependency_analyzer.py",
+      "overall_risk_score": 4.784412828271733,
+      "risk_level": "LOW",
+      "complexity_risk": 3.3333333333333335,
+      "security_risk": 0,
+      "churn_risk": 6.7918042240184215,
+      "bus_factor_risk": 0.0,
+      "failure_probability": 0.1037087460053886,
+      "critical_issues": [],
+      "recommendations": [
+        "Monitor and maintain current quality standards"
+      ]
+    }
+  ],
+  "security_issues": [
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\risk_radar.py",
+      "line_number": 355,
+      "issue_type": "unsafe_function_os.system",
+      "severity": "CRITICAL",
+      "description": "os.system() is vulnerable to shell injection",
+      "recommendation": "Avoid using os.system(). Use safer alternatives."
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\analyzers\\security_analyzer.py",
+      "line_number": 203,
+      "issue_type": "debug_mode_enabled",
+      "severity": "HIGH",
+      "description": "Debug mode appears to be enabled",
+      "recommendation": "Disable debug mode in production"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\analyzers\\security_analyzer.py",
+      "line_number": 207,
+      "issue_type": "debug_mode_enabled",
+      "severity": "HIGH",
+      "description": "Debug mode appears to be enabled",
+      "recommendation": "Disable debug mode in production"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\analyzers\\security_analyzer.py",
+      "line_number": 209,
+      "issue_type": "debug_mode_enabled",
+      "severity": "HIGH",
+      "description": "Debug mode appears to be enabled",
+      "recommendation": "Disable debug mode in production"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\analyzers\\security_analyzer.py",
+      "line_number": 211,
+      "issue_type": "debug_mode_enabled",
+      "severity": "HIGH",
+      "description": "Debug mode appears to be enabled",
+      "recommendation": "Disable debug mode in production"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\tests\\test_analyzers.py",
+      "line_number": 22,
+      "issue_type": "hardcoded_secret_api_key",
+      "severity": "CRITICAL",
+      "description": "Hardcoded api key detected",
+      "recommendation": "Remove hardcoded api key and use environment variables or secrets management"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\tests\\test_analyzers.py",
+      "line_number": 32,
+      "issue_type": "unsafe_function_eval",
+      "severity": "CRITICAL",
+      "description": "eval() can execute arbitrary code",
+      "recommendation": "Avoid using eval(). Use safer alternatives."
+    }
+  ],
+  "dependency_risks": [
+    {
+      "package_name": "beautifulsoup4",
+      "current_version": "1.16.1",
+      "latest_version": "4.2.5",
+      "upgrade_risk_score": 63.419678821687256,
+      "known_vulnerabilities": 4
+    },
+    {
+      "package_name": "pymongo",
+      "current_version": "2.10.8",
+      "latest_version": "2.11.0",
+      "upgrade_risk_score": 39.06629290216456,
+      "known_vulnerabilities": 0
+    },
+    {
+      "package_name": "pillow",
+      "current_version": "2.17.3",
+      "latest_version": "4.9.3",
+      "upgrade_risk_score": 14.265860419599969,
+      "known_vulnerabilities": 1
+    },
+    {
+      "package_name": "jwt",
+      "current_version": "3.12.1",
+      "latest_version": "3.13.4",
+      "upgrade_risk_score": 13.404282713281443,
+      "known_vulnerabilities": 1
+    },
+    {
+      "package_name": "requests",
+      "current_version": "3.14.4",
+      "latest_version": "2.17.8",
+      "upgrade_risk_score": 10.85317687697888,
+      "known_vulnerabilities": 1
+    },
+    {
+      "package_name": "bcrypt",
+      "current_version": "1.12.10",
+      "latest_version": "4.4.0",
+      "upgrade_risk_score": 1.308287921641163,
+      "known_vulnerabilities": 0
+    }
+  ],
+  "failure_predictions": [
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\technical_debt_calculator.py",
+      "failure_probability": 0.468451615693702,
+      "risk_factors": [
+        "High code churn",
+        "Single point of failure"
+      ],
+      "recommendation": "MEDIUM: Plan improvements and document edge cases"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\team_impact_analyzer.py",
+      "failure_probability": 0.4426493284447758,
+      "risk_factors": [
+        "High code churn",
+        "Single point of failure",
+        "Unstable (frequent commits)"
+      ],
+      "recommendation": "MEDIUM: Plan improvements and document edge cases"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\risk_radar.py",
+      "failure_probability": 0.4051733108917707,
+      "risk_factors": [
+        "High code churn",
+        "Single point of failure",
+        "Unstable (frequent commits)"
+      ],
+      "recommendation": "MEDIUM: Plan improvements and document edge cases"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\analyzers\\__init__.py",
+      "failure_probability": 0.36616029729112826,
+      "risk_factors": [
+        "Single point of failure"
+      ],
+      "recommendation": "MEDIUM: Plan improvements and document edge cases"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\ml_models\\failure_predictor.py",
+      "failure_probability": 0.33522588570450407,
+      "risk_factors": [
+        "Single point of failure"
+      ],
+      "recommendation": "MEDIUM: Plan improvements and document edge cases"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\tests\\test_integration.py",
+      "failure_probability": 0.33092242143888706,
+      "risk_factors": [
+        "Single point of failure",
+        "Unstable (frequent commits)"
+      ],
+      "recommendation": "MEDIUM: Plan improvements and document edge cases"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\analyzers\\complexity_analyzer.py",
+      "failure_probability": 0.3195830909133297,
+      "risk_factors": [
+        "Single point of failure",
+        "Unstable (frequent commits)"
+      ],
+      "recommendation": "MEDIUM: Plan improvements and document edge cases"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\trend_analyzer.py",
+      "failure_probability": 0.3091948037003398,
+      "risk_factors": [
+        "Single point of failure",
+        "Unstable (frequent commits)"
+      ],
+      "recommendation": "MEDIUM: Plan improvements and document edge cases"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\report_formatter.py",
+      "failure_probability": 0.2934476859893753,
+      "risk_factors": [
+        "Single point of failure"
+      ],
+      "recommendation": "LOW: Monitor and maintain current quality standards"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\main.py",
+      "failure_probability": 0.29260600964479644,
+      "risk_factors": [
+        "High code churn",
+        "Unstable (frequent commits)"
+      ],
+      "recommendation": "LOW: Monitor and maintain current quality standards"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\test_coverage_analyzer.py",
+      "failure_probability": 0.2813854831970682,
+      "risk_factors": [
+        "Single point of failure",
+        "Unstable (frequent commits)"
+      ],
+      "recommendation": "LOW: Monitor and maintain current quality standards"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\analyzers\\security_analyzer.py",
+      "failure_probability": 0.28097241493988834,
+      "risk_factors": [
+        "Single point of failure"
+      ],
+      "recommendation": "LOW: Monitor and maintain current quality standards"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\tests\\__init__.py",
+      "failure_probability": 0.2787887702770011,
+      "risk_factors": [
+        "Single point of failure"
+      ],
+      "recommendation": "LOW: Monitor and maintain current quality standards"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\ml_models\\__init__.py",
+      "failure_probability": 0.2411191351273083,
+      "risk_factors": [
+        "Single point of failure",
+        "Unstable (frequent commits)"
+      ],
+      "recommendation": "LOW: Monitor and maintain current quality standards"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\tests\\test_analyzers.py",
+      "failure_probability": 0.19338746771481274,
+      "risk_factors": [],
+      "recommendation": "LOW: Monitor and maintain current quality standards"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\__init__.py",
+      "failure_probability": 0.14181230937993805,
+      "risk_factors": [],
+      "recommendation": "LOW: Monitor and maintain current quality standards"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\analyzers\\git_analyzer.py",
+      "failure_probability": 0.13869920714883854,
+      "risk_factors": [
+        "Unstable (frequent commits)"
+      ],
+      "recommendation": "LOW: Monitor and maintain current quality standards"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\models.py",
+      "failure_probability": 0.13351252924054258,
+      "risk_factors": [
+        "Unstable (frequent commits)"
+      ],
+      "recommendation": "LOW: Monitor and maintain current quality standards"
+    },
+    {
+      "file_path": "C:\\Users\\Karthik\\Desktop\\K Bhavani Venkata Karthik\\Source-Code-Risk-Radar\\src\\analyzers\\dependency_analyzer.py",
+      "failure_probability": 0.1037087460053886,
+      "risk_factors": [],
+      "recommendation": "LOW: Monitor and maintain current quality standards"
+    }
+  ]
+}
