@@ -15,6 +15,10 @@ from src.analyzers.security_analyzer import SecurityAnalyzer, DummySecurityAnaly
 from src.analyzers.complexity_analyzer import ComplexityAnalyzer, DummyComplexityAnalyzer
 from src.analyzers.dependency_analyzer import DependencyAnalyzer, DummyDependencyAnalyzer
 from src.ml_models.failure_predictor import FailurePredictor, DummyFailurePredictor
+from src.trend_analyzer import TrendAnalyzer, DummyTrendAnalyzer
+from src.technical_debt_calculator import TechnicalDebtCalculator, DummyTechnicalDebtCalculator
+from src.test_coverage_analyzer import TestCoverageAnalyzer, DummyTestCoverageAnalyzer
+from src.team_impact_analyzer import TeamImpactAnalyzer, DummyTeamImpactAnalyzer
 
 
 class RiskRadar:
@@ -26,7 +30,7 @@ class RiskRadar:
         self.use_dummy_data = use_dummy_data
         self.use_git = self._check_git_available() and not use_dummy_data
 
-        # Initialize analyzers
+        # Initialize core analyzers
         if use_dummy_data or not self.use_git:
             self.git_analyzer = DummyGitAnalyzer(repo_path)
         else:
@@ -42,6 +46,18 @@ class RiskRadar:
             self.dependency_analyzer = DependencyAnalyzer()
             self.failure_predictor = FailurePredictor()
             self.failure_predictor.train_on_dummy_data()
+
+        # Initialize value-add analyzers
+        if use_dummy_data:
+            self.trend_analyzer = DummyTrendAnalyzer()
+            self.debt_calculator = DummyTechnicalDebtCalculator()
+            self.coverage_analyzer = DummyTestCoverageAnalyzer()
+            self.team_analyzer = DummyTeamImpactAnalyzer()
+        else:
+            self.trend_analyzer = TrendAnalyzer()
+            self.debt_calculator = TechnicalDebtCalculator()
+            self.coverage_analyzer = TestCoverageAnalyzer(repo_path)
+            self.team_analyzer = TeamImpactAnalyzer()
 
     def analyze(self) -> RiskReport:
         """Execute complete risk analysis"""
@@ -109,6 +125,20 @@ class RiskRadar:
             critical_modules=[m for m in modules if m.overall_risk_score >= 80],
             failure_predictions=failure_predictions
         )
+
+        # Enrich report with value-add features
+        print("Analyzing trends...")
+        report.trend_analysis = self.trend_analyzer.get_trend_analysis(report)
+        self.trend_analyzer.save_snapshot(report)
+
+        print("Calculating technical debt...")
+        report.technical_debt = self.debt_calculator.calculate_debt(report)
+
+        print("Analyzing test coverage...")
+        report.test_coverage = self.coverage_analyzer.analyze_coverage(report)
+
+        print("Analyzing team impact...")
+        report.team_impact = self.team_analyzer.analyze_team_impact(report)
 
         return report
 

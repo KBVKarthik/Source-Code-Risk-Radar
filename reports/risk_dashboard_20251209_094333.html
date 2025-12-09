@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Radar Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 30px; }
+        .summary-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .summary-card h3 { color: #333; margin-bottom: 10px; }
+        .summary-card .value { font-size: 2em; font-weight: bold; color: #667eea; }
+        .summary-card .label { color: #666; font-size: 0.9em; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .risk-score { font-size: 3em; font-weight: bold; margin-bottom: 10px; }
+        .risk-critical { color: #d32f2f; }
+        .risk-high { color: #f57c00; }
+        .risk-medium { color: #fbc02d; }
+        .risk-low { color: #388e3c; }
+        .section { background: white; padding: 30px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .section h2 { color: #333; margin-bottom: 20px; border-bottom: 3px solid #667eea; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #f5f5f5; font-weight: bold; color: #333; }
+        tr:hover { background: #f9f9f9; }
+        .module-item { padding: 15px; margin: 10px 0; background: #f9f9f9; border-left: 4px solid #667eea; border-radius: 4px; }
+        .module-item.critical { border-left-color: #d32f2f; }
+        .module-item.high { border-left-color: #f57c00; }
+        .footer { text-align: center; padding: 20px; color: #666; font-size: 0.9em; }
+        .chart-container { height: 400px; margin: 20px 0; }
+        .metric { display: inline-block; margin: 10px 20px 10px 0; }
+        .metric-label { color: #666; font-size: 0.9em; }
+        .metric-value { font-size: 1.8em; font-weight: bold; color: #667eea; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 Source Code Risk Radar</h1>
+        <p>Comprehensive Code Analysis Dashboard</p>
+    </div>
+
+    <div class="container">
+        <!-- Summary Section -->
+        <div class="summary-grid">
+            <div class="summary-card">
+                <h3>Overall Risk Score</h3>
+                <div class="risk-score risk-low">27.9</div>
+                <div class="label">Risk Level: LOW</div>
+            </div>
+            <div class="summary-card">
+                <h3>Files Analyzed</h3>
+                <div class="value">19</div>
+                <div class="label">Total Lines of Code: 1,458</div>
+            </div>
+            <div class="summary-card">
+                <h3>Critical Issues</h3>
+                <div class="value risk-critical">0</div>
+                <div class="label">Require Immediate Action</div>
+            </div>
+            <div class="summary-card">
+                <h3>High Risk Modules</h3>
+                <div class="value risk-high">1</div>
+                <div class="label">Schedule for Review</div>
+            </div>
+        </div>
+
+        <!-- Critical Modules Section -->
+        
+
+        <!-- High Risk Modules Section -->
+        <div class="section"><h2>🟠 High Risk Modules</h2><table><tr><th>File</th><th>Risk Score</th><th>Complexity</th><th>Security</th><th>Churn</th></tr>
+            <tr>
+                <td>C:\Users\Karthik\Desktop\K Bhavani Venkata Karthik\Source-Code-Risk-Radar\src\analyzers\security_analyzer.py</td>
+                <td><strong>70.1/100</strong></td>
+                <td>3.3</td>
+                <td>80.0</td>
+                <td>52.6</td>
+            </tr></table></div>
+
+        <!-- Failure Predictions Section -->
+        <div class="section"><h2>⚠️ Likely Failure Points (Next 3 Months)</h2><div>
+            <div class="module-item high">
+                <strong>C:\Users\Karthik\Desktop\K Bhavani Venkata Karthik\Source-Code-Risk-Radar\src\ml_models\__init__.py</strong><br>
+                <div class="metric">
+                    <div class="metric-label">Failure Probability</div>
+                    <div class="metric-value">43%</div>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.9em;">• High code churn<br>• Single point of failure<br>• Unstable (frequent commits)</div>
+            </div>
+            <div class="module-item high">
+                <strong>C:\Users\Karthik\Desktop\K Bhavani Venkata Karthik\Source-Code-Risk-Radar\src\analyzers\security_analyzer.py</strong><br>
+                <div class="metric">
+                    <div class="metric-label">Failure Probability</div>
+                    <div class="metric-value">39%</div>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.9em;">• High code churn<br>• Single point of failure<br>• Unstable (frequent commits)</div>
+            </div>
+            <div class="module-item high">
+                <strong>C:\Users\Karthik\Desktop\K Bhavani Venkata Karthik\Source-Code-Risk-Radar\tests\test_analyzers.py</strong><br>
+                <div class="metric">
+                    <div class="metric-label">Failure Probability</div>
+                    <div class="metric-value">36%</div>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.9em;">• Single point of failure</div>
+            </div>
+            <div class="module-item high">
+                <strong>C:\Users\Karthik\Desktop\K Bhavani Venkata Karthik\Source-Code-Risk-Radar\src\analyzers\complexity_analyzer.py</strong><br>
+                <div class="metric">
+                    <div class="metric-label">Failure Probability</div>
+                    <div class="metric-value">34%</div>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.9em;">• Single point of failure</div>
+            </div>
+            <div class="module-item high">
+                <strong>C:\Users\Karthik\Desktop\K Bhavani Venkata Karthik\Source-Code-Risk-Radar\tests\test_integration.py</strong><br>
+                <div class="metric">
+                    <div class="metric-label">Failure Probability</div>
+                    <div class="metric-value">34%</div>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.9em;">• Single point of failure<br>• Unstable (frequent commits)</div>
+            </div>
+            <div class="module-item high">
+                <strong>C:\Users\Karthik\Desktop\K Bhavani Venkata Karthik\Source-Code-Risk-Radar\src\report_formatter.py</strong><br>
+                <div class="metric">
+                    <div class="metric-label">Failure Probability</div>
+                    <div class="metric-value">31%</div>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.9em;">• High code churn<br>• Unstable (frequent commits)</div>
+            </div>
+            <div class="module-item high">
+                <strong>C:\Users\Karthik\Desktop\K Bhavani Venkata Karthik\Source-Code-Risk-Radar\tests\__init__.py</strong><br>
+                <div class="metric">
+                    <div class="metric-label">Failure Probability</div>
+                    <div class="metric-value">31%</div>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.9em;">• Single point of failure</div>
+            </div>
+            <div class="module-item high">
+                <strong>C:\Users\Karthik\Desktop\K Bhavani Venkata Karthik\Source-Code-Risk-Radar\src\technical_debt_calculator.py</strong><br>
+                <div class="metric">
+                    <div class="metric-label">Failure Probability</div>
+                    <div class="metric-value">30%</div>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.9em;">• Single point of failure<br>• Unstable (frequent commits)</div>
+            </div>
+            <div class="module-item high">
+                <strong>C:\Users\Karthik\Desktop\K Bhavani Venkata Karthik\Source-Code-Risk-Radar\src\analyzers\dependency_analyzer.py</strong><br>
+                <div class="metric">
+                    <div class="metric-label">Failure Probability</div>
+                    <div class="metric-value">29%</div>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.9em;">• Single point of failure<br>• Unstable (frequent commits)</div>
+            </div>
+            <div class="module-item high">
+                <strong>C:\Users\Karthik\Desktop\K Bhavani Venkata Karthik\Source-Code-Risk-Radar\src\team_impact_analyzer.py</strong><br>
+                <div class="metric">
+                    <div class="metric-label">Failure Probability</div>
+                    <div class="metric-value">27%</div>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.9em;">• Single point of failure</div>
+            </div></div></div>
+
+        <!-- Security Issues Section -->
+        <div class="section"><h2>🔐 Critical Security Issues</h2><table><tr><th>File</th><th>Line</th><th>Issue Type</th><th>Recommendation</th></tr>
+            <tr>
+                <td>C:\Users\Karthik\Desktop\K Bhavani Venkata Karthik\Source-Code-Risk-Radar\src\risk_radar.py</td>
+                <td>355</td>
+                <td><strong>unsafe_function_os.system</strong></td>
+                <td>Avoid using os.system(). Use safer alternatives.</td>
+            </tr>
+            <tr>
+                <td>C:\Users\Karthik\Desktop\K Bhavani Venkata Karthik\Source-Code-Risk-Radar\tests\test_analyzers.py</td>
+                <td>22</td>
+                <td><strong>hardcoded_secret_api_key</strong></td>
+                <td>Remove hardcoded api key and use environment variables or secrets management</td>
+            </tr>
+            <tr>
+                <td>C:\Users\Karthik\Desktop\K Bhavani Venkata Karthik\Source-Code-Risk-Radar\tests\test_analyzers.py</td>
+                <td>32</td>
+                <td><strong>unsafe_function_eval</strong></td>
+                <td>Avoid using eval(). Use safer alternatives.</td>
+            </tr></table></div>
+
+        <!-- Dependency Risks Section -->
+        <div class="section"><h2>📦 High-Risk Dependencies</h2><table><tr><th>Package</th><th>Current</th><th>Latest</th><th>Risk Score</th><th>Vulnerabilities</th></tr>
+            <tr>
+                <td><strong>pillow</strong></td>
+                <td>2.12.9</td>
+                <td>2.18.7</td>
+                <td>100.0/100</td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td><strong>jwt</strong></td>
+                <td>2.4.0</td>
+                <td>3.0.10</td>
+                <td>90.4/100</td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td><strong>django</strong></td>
+                <td>1.0.6</td>
+                <td>3.17.1</td>
+                <td>85.2/100</td>
+                <td>5</td>
+            </tr></table></div>
+
+        <!-- Trend Analysis Section -->
+        <div class="section"><h2>📈 Risk Trends & Historical Comparison</h2><div style="padding: 15px; background: #f0f0f0; border-radius: 5px; margin-bottom: 20px;"><p style="color: #388e3c; font-weight: bold;">Positive Trend: Risk improving by 8.5% (67% improvement rate)</p></div><p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">✓ Risk score improving! Maintaining 67% improvement rate.</p><p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">Great! Fixed 2 CRITICAL issues in recent updates.</p><p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">Keep up the momentum - 8.5% risk reduction this period!</p></div>
+
+        <!-- Technical Debt Section -->
+        <div class="section"><h2>💰 Technical Debt Analysis</h2><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;"><div style="padding: 15px; background: #ffebee; border-radius: 5px; border-left: 4px solid #d32f2f;">
+            <strong>Total Debt</strong><br>
+            <span style="font-size: 1.5em; color: #d32f2f;">312 hours</span><br>
+            <span style="font-size: 0.9em; color: #666;">Est. $46,875</span>
+        </div><div style="padding: 15px; background: #fff3e0; border-radius: 5px; border-left: 4px solid #f57c00;">
+            <strong>Time to Resolve</strong><br>
+            <span style="font-size: 1.5em; color: #f57c00;">7.8 weeks</span><br>
+            <span style="font-size: 0.9em; color: #666;">with 2 developers</span>
+        </div><div style="padding: 15px; background: #e3f2fd; border-radius: 5px; border-left: 4px solid #2196F3;">
+            <strong>Debt by Type</strong><br>
+            <span style="font-size: 0.9em;">Complexity: 68h<br>Security: 32h<br>Churn: 64h</span>
+        </div></div><h3>Top Debt Items</h3><table style="font-size: 0.9em;"><tr><th>File</th><th>Type</th><th>Priority</th><th>Hours</th><th>Impact</th></tr><tr>
+                    <td><strong>src/core/engine.py</strong></td>
+                    <td>bus_factor</td>
+                    <td style="color: #d32f2f;">CRITICAL</td>
+                    <td>12.0h</td>
+                    <td>Project risk if developer leaves, major bottleneck</td>
+                </tr><tr>
+                    <td><strong>src/api/auth.py</strong></td>
+                    <td>security</td>
+                    <td style="color: #d32f2f;">CRITICAL</td>
+                    <td>8.0h</td>
+                    <td>System can be easily compromised, data breach risk</td>
+                </tr><tr>
+                    <td><strong>src/utils/parser.py</strong></td>
+                    <td>complexity</td>
+                    <td style="color: #f57c00;">HIGH</td>
+                    <td>6.0h</td>
+                    <td>Hard to understand, test coverage weak, bugs likely</td>
+                </tr></table></div>
+
+        <!-- Test Coverage Section -->
+        <div class="section"><h2>🧪 Test Coverage Analysis</h2><div style="margin-bottom: 20px;">
+            <p><strong>Overall Coverage: 62.5%</strong></p>
+            <div style="width: 100%; height: 30px; background: #e0e0e0; border-radius: 5px; overflow: hidden;">
+                <div style="width: 62.5%; height: 100%; background: #fbc02d; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                    62.5%
+                </div>
+            </div>
+        </div><div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px;">
+            <div style="padding: 15px; background: #e8f5e9; border-radius: 5px;">
+                <strong>With Tests</strong><br>
+                <span style="font-size: 1.5em; color: #388e3c;">18</span> files
+            </div>
+            <div style="padding: 15px; background: #ffebee; border-radius: 5px;">
+                <strong>Without Tests</strong><br>
+                <span style="font-size: 1.5em; color: #d32f2f;">11</span> files
+            </div>
+            <div style="padding: 15px; background: #fff3e0; border-radius: 5px;">
+                <strong>Critical Untested</strong><br>
+                <span style="font-size: 1.5em; color: #f57c00;">3</span> modules
+            </div>
+            <div style="padding: 15px; background: #f3e5f5; border-radius: 5px;">
+                <strong>Priority</strong><br>
+                <span style="font-size: 1.5em; color: #7b1fa2;">HIGH</span>
+            </div>
+        </div><h3>Testing Recommendations</h3><p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">Test coverage at 62.5%. Improve to 80%+ for production readiness.</p><p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">CRITICAL: 3 CRITICAL/HIGH risk modules have NO tests. This is unacceptable.</p><p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">Start with: src/payments/processor.py</p><p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">Use pytest (Python) or Jest (JavaScript) for unit tests.</p><p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">Aim for 80%+ coverage on critical paths (security, payments, core logic).</p></div>
+
+        <!-- Team Impact Section -->
+        <div class="section"><h2>👥 Team Impact & Knowledge Distribution</h2><div style="padding: 15px; background: #f0f0f0; border-radius: 5px; margin-bottom: 20px;">
+            <p><strong>Team Risk Exposure Score: 145.3/100</strong></p>
+            <p>Risk score averaged across all team members and their assigned modules</p>
+        </div><h3>Knowledge Distribution</h3><table style="font-size: 0.9em;"><tr><th>Developer</th><th>Modules Owned</th></tr><tr><td>Bob (Backend)</td><td>12</td></tr><tr><td>Diana (Frontend)</td><td>9</td></tr><tr><td>Alice (Security Lead)</td><td>8</td></tr><tr><td>Charlie (DBA)</td><td>6</td></tr><tr><td>Eve (Payments)</td><td>5</td></tr></table><h3>Bus Factors (Critical Dependencies)</h3><p style="margin: 10px 0; padding: 10px; background: #ffebee; border-left: 3px solid #d32f2f; color: #d32f2f;">⚠️ Alice (Security Lead) - owns all auth/security modules</p><p style="margin: 10px 0; padding: 10px; background: #ffebee; border-left: 3px solid #d32f2f; color: #d32f2f;">⚠️ Bob (Backend) - single owner of payment processor</p><p style="margin: 10px 0; padding: 10px; background: #ffebee; border-left: 3px solid #d32f2f; color: #d32f2f;">⚠️ Eve (Payments) - only person familiar with transaction system</p><h3>Recommended Actions</h3><p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">Isolation Risk: Alice working in silo on high-risk auth code. Need pairing sessions.</p><p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">Bus Factor: Bob is single point of failure for critical payment module. Document immediately.</p><p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">Load Imbalance: Bob has 12 modules vs team avg of 8. Redistribute work.</p><p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">Code Review: Bob needs peer review on critical modules. Assign code review buddy.</p><p style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-left: 3px solid #667eea;">Knowledge Sharing: Schedule pair programming between Alice and Diana.</p></div>
+    </div>
+
+    <div class="footer">
+        <p>Risk Radar Analysis Report • Generated on 2025-12-09 09:43:33</p>
+        <p>Repository: C:\Users\Karthik\Desktop\K Bhavani Venkata Karthik\Source-Code-Risk-Radar</p>
+    </div>
+</body>
+</html>
