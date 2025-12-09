@@ -1,0 +1,80 @@
+{
+  "analysis": {
+    "enabled_checks": [
+      "git",
+      "security",
+      "complexity",
+      "ml_prediction",
+      "dependencies"
+    ],
+    "max_file_size_mb": 5,
+    "ignore_patterns": [
+      ".git",
+      ".venv",
+      "node_modules",
+      "__pycache__",
+      ".pytest_cache",
+      "dist",
+      "build",
+      ".egg-info"
+    ]
+  },
+  "git": {
+    "churn_threshold": 20,
+    "bus_factor_threshold": 1,
+    "months_to_analyze": 12,
+    "min_commits_for_analysis": 5
+  },
+  "security": {
+    "detect_hardcoded_secrets": true,
+    "unsafe_functions": [
+      "eval",
+      "exec",
+      "pickle.loads",
+      "subprocess.call",
+      "os.system",
+      "exec",
+      "globals",
+      "locals"
+    ],
+    "secret_patterns": [
+      "api[_-]?key",
+      "secret[_-]?key",
+      "password",
+      "token",
+      "aws[_-]?key",
+      "private[_-]?key"
+    ]
+  },
+  "complexity": {
+    "cyclomatic_threshold": {
+      "low": 5,
+      "medium": 10,
+      "high": 20,
+      "critical": 30
+    },
+    "cognitive_threshold": 15,
+    "lines_of_code_threshold": 200
+  },
+  "ml": {
+    "model_type": "random_forest",
+    "features": [
+      "churn_rate",
+      "complexity",
+      "file_age",
+      "commit_frequency",
+      "author_count"
+    ],
+    "prediction_horizon_months": 3
+  },
+  "output": {
+    "formats": [
+      "html",
+      "json",
+      "csv"
+    ],
+    "output_dir": "./reports",
+    "generate_dashboard": true,
+    "include_visualizations": true
+  }
+}
